@@ -277,7 +277,7 @@ def compute_FstarN(
     This is intended for fast-rotating A-type stars with a known exoplanet with
     rotation-broadened spectra. This follows the methodology presented in Lam
     et al. (in prep)
-    
+
     Parameters:
     -----------
     wl : 1d np.array(float)
@@ -308,7 +308,7 @@ def compute_FstarN(
     F_oot_HARPS : 1d np.array(float)
         Out-of-transit broadened spectrum measured from HARPS. Only used if
         instrument = "MAROON-X" since we don't have 1d spectra from MAROON-X.
-        
+
     Returns:
     --------
     FstarN : 1d np.array(float)
@@ -330,22 +330,28 @@ def compute_FstarN(
 
     elif instrument == "StarRotator":
         if SR == None:
-            raise Exception("StarRotator mode has been selected but no StarRotator "\
-                            "object has been input. Set the StarRotator object.")
+            raise Exception(
+                "StarRotator mode has been selected but no StarRotator "
+                "object has been input. Set the StarRotator object."
+            )
         F_obsc = compute_obscured_flux(res, D, F_oot)
         F_obsc_shifted = inverse_shift_SR(F_obsc, in_transit_idx, SR.wl, SR)
 
     elif instrument == "MAROON-X":
         if F_oot_HARPS == None:
-            raise Exception("MAROON-X instrument has been selected but no reference "\
-                            "out-of-transit stellar spectrum has been provided. "\
-                            "Enter a 1d out-of-transit stellar spectrum from eg. HARPS.")
+            raise Exception(
+                "MAROON-X instrument has been selected but no reference "
+                "out-of-transit stellar spectrum has been provided. "
+                "Enter a 1d out-of-transit stellar spectrum from eg. HARPS."
+            )
         F_obsc = compute_obscured_flux(res, D, F_oot_HARPS)
         F_obsc_shifted = inverse_shift(F_obsc, in_transit_idx, wl, xp, vsini)
-        
+
     else:
-        raise Exception("Invalid instrument has been entered. Select either "\
-                        "HARPS, StarRotator or MAROON-X.")
+        raise Exception(
+            "Invalid instrument has been entered. Select either "
+            "HARPS, StarRotator or MAROON-X."
+        )
 
     FstarN = weighted_average(
         F_obsc_shifted, r[in_transit_idx.flatten()], Rp_Rs, u1, u2
