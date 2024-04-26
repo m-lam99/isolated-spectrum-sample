@@ -1,5 +1,4 @@
-# Isolated Narrow Spectrum Sample
-Coding sample for NASA/GSFC Postbaccalaureate Program
+# Coding sample for NASA/GSFC Postbaccalaureate Program - Isolated Spectrum
 
 Code demonstrating primary functionality developed in Lam et al. (in prep.). `narrow_spectrum.py` contains all the function definitions required for calculating the isolated spectrum from time-series spectra of a fast-rotating star during an exoplanet transit event. The included Jupyter notebook provides an example of applying this method to 3 HARPS observations of WASP-189 during transit events of WASP-189 b, and calculating the average isolated spectrum. I have also included a plot comparing the out-of-transit broadened spectrum with the isolated spectrum calculated from the same nights.
 
